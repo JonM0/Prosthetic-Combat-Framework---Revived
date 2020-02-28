@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+
+	<name>Prosthetic Combat Framework</name>
+
+	<description>Credit goes to IndoOreno (https://github.com/IndoOreno/ProstheticCombatFramework), I just didn't want to see it die.</description>
+
+	<author>Jon</author>
+	<packageId>Jon.Revivals.ProstheticCombatFramework</packageId>
+	<url></url>
+
+	<supportedVersions>
+		<li>1.1</li>
+	</supportedVersions>
+
+	<modDependencies>
+	</modDependencies>
+	<loadBefore>
+	</loadBefore>
+	<loadAfter>
+	</loadAfter>
+	<incompatibleWith>
+	</incompatibleWith>
+
+</ModMetaData>

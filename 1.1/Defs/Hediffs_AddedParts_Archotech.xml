@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HediffDef ParentName="MSE_AddedBodyPartArchotech">
+		<defName>ArchotechArm</defName>
+		<label>archotech arm</label>
+		<labelNoun>an archotech arm</labelNoun>
+		<comps>
+			<li Class="OrenoPCF.HediffCompProperties_VerbGiverExtended">
+				<toggleLabel>arch. arm</toggleLabel>
+				<toggleDescription>a weaponized archotech arm.\n\ncan beat your enemies to pulp.</toggleDescription>
+				<toggleIconPath>UI/Icons/Medical/IconPartSystem</toggleIconPath>
+				<verbs>
+					<li>
+						<label>charge rifle</label>
+						<verbClass>Verb_Shoot</verbClass>
+						<accuracyTouch>0.55</accuracyTouch>
+						<accuracyShort>0.64</accuracyShort>
+						<accuracyMedium>0.55</accuracyMedium>
+						<accuracyLong>0.45</accuracyLong>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_ChargeRifle</defaultProjectile>
+						<warmupTime>1.0</warmupTime>
+						<range>25.9</range>
+						<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+						<burstShotCount>3</burstShotCount>
+						<soundCast>Shot_ChargeRifle</soundCast>
+						<soundCastTail>GunTail_Medium</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</li>
+					<li>
+						<label>charge lance</label>
+						<verbClass>Verb_Shoot</verbClass>
+						<accuracyTouch>0.65</accuracyTouch>
+						<accuracyShort>0.85</accuracyShort>
+						<accuracyMedium>0.85</accuracyMedium>
+						<accuracyLong>0.75</accuracyLong>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_ChargeLance</defaultProjectile>
+						<warmupTime>1.7</warmupTime>
+						<range>36.9</range>
+						<soundCast>ChargeLance_Fire</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</li>
+					<li>
+						<label>saitama punch</label>
+						<verbClass>Verb_MeleeAttackDamage</verbClass>
+						<defaultCooldownTime>1.65</defaultCooldownTime>
+						<meleeDamageBaseAmount>1000</meleeDamageBaseAmount>
+						<meleeDamageDef>Blunt</meleeDamageDef>
+					</li>
+				</verbs>
+				<verbsProperties>
+					<li>
+						<label>charge rifle</label>
+						<description>a weaponized archotech arm that shoot like charge rifle.</description>
+						<uiIconPath>UI/Icons/Prosthetic/ChargeRifle</uiIconPath>
+					</li>
+					<li>
+						<label>charge lance</label>
+						<description>a weaponized archotech arm that shoot like charge lance.</description>
+						<uiIconPath>UI/Icons/Prosthetic/ChargeLance</uiIconPath>
+					</li>
+					<li>
+						<label>saitama punch</label>
+						<description>a hand that can one punch everything.</description>
+						<uiIconPath>UI/Icons/Prosthetic/SaitamaPunch</uiIconPath>
+					</li>
+				</verbsProperties>
+			</li>
+		</comps>
+		<spawnThingOnRemoved>ArchotechArm</spawnThingOnRemoved>
+		<addedPartProps>
+			<solid>true</solid>
+			<partEfficiency>1.50</partEfficiency>
+		</addedPartProps>
+	</HediffDef>
+
+</Defs>

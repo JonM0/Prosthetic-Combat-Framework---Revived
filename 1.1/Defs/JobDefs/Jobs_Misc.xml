@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JobDef>
+		<defName>PCF_AttackStaticExtended</defName>
+		<driverClass>OrenoPCF.JobDriver_AttackStaticExtended</driverClass>
+		<reportString>attacking TargetA.</reportString>
+		<alwaysShowWeapon>true</alwaysShowWeapon>
+		<casualInterruptible>false</casualInterruptible>
+		<collideWithPawns>true</collideWithPawns>
+	</JobDef>
+
+</Defs>
