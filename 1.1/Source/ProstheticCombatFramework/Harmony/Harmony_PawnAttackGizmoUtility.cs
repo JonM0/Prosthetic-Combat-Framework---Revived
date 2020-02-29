@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace OrenoPCF
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_PawnAttackGizmoUtility
     {
@@ -18,24 +18,23 @@ namespace OrenoPCF
                 List<Gizmo> gizmos = new List<Gizmo>(__result);
                 if (pawn.Drafted)
                 {
-                    List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
-                    for (int i = 0; i < hediffs.Count; i++)
+                    foreach ( Hediff hediff in pawn.health.hediffSet.hediffs )
                     {
-                        HediffComp_VerbGiverExtended verbGiverExtended = hediffs[i].TryGetComp<HediffComp_VerbGiverExtended>();
+                        HediffComp_VerbGiverExtended verbGiverExtended = hediff.TryGetComp<HediffComp_VerbGiverExtended>();
                         if (verbGiverExtended != null)
                         {
-                            foreach (Verb verb in verbGiverExtended.AllVerbs.Where(verbs => verbs.IsMeleeAttack))
+                            foreach (Verb meleeVerb in verbGiverExtended.AllVerbs.Where(verbs => verbs.IsMeleeAttack)) // for each melee verb added by a hediff
                             {
                                 foreach (PCF_VerbProperties verbProperties in verbGiverExtended.Props.verbsProperties)
                                 {
-                                    if (verb.verbProps.label == verbProperties.label)
+                                    if (meleeVerb.verbProps.label == verbProperties.label)
                                     {
                                         Command_HediffVerbMelee command_HediffVerbMelee = new Command_HediffVerbMelee
                                         {
-                                            verb = verb,
+                                            verb = meleeVerb,
                                             defaultLabel = verbProperties.label,
                                             defaultDesc = verbProperties.description.CapitalizeFirst(),
-                                            icon = PCF_VanillaExtender.GetIcon(verbGiverExtended.Pawn.GetUniqueLoadID() + "_" + verb.loadID, verbProperties.uiIconPath),
+                                            icon = PCF_VanillaExtender.GetIcon(verbGiverExtended.Pawn.GetUniqueLoadID() + "_" + meleeVerb.loadID, verbProperties.uiIconPath),
                                             iconAngle = verbProperties.uiIconAngle,
                                             iconOffset = verbProperties.uiIconOffset
                                         };

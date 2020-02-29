@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -10,9 +10,9 @@ namespace OrenoPCF
     [StaticConstructorOnStartup]
     public class ProstheticCombatFramework
     {
-        static ProstheticCombatFramework()
+        static ProstheticCombatFramework()   // harmony patch everything on startup
         {
-            var harmony = HarmonyInstance.Create("OrenoPCF");
+            Harmony harmony = new Harmony("OrenoPCF");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
@@ -22,23 +22,24 @@ namespace OrenoPCF
         public static void CheckForAutoAttack(JobDriver jobDriver)
         {
             List<Hediff> hediffs = jobDriver.pawn.health.hediffSet.hediffs;
-            int hediff = hediffs.Count;
-            for (int i = 0; i < hediff; i++)
+            
+            foreach ( Hediff hediff in hediffs )
             {
-                HediffComp_VerbGiverExtended verbGiverExtended = hediffs[i].TryGetComp<HediffComp_VerbGiverExtended>();
-                if (verbGiverExtended != null)
+                HediffComp_VerbGiverExtended verbGiverExtended = hediff.TryGetComp<HediffComp_VerbGiverExtended>();
+                if (verbGiverExtended != null) // for each comp that gives verbs do this:
                 {
                     List<Verb> allVerbs = verbGiverExtended.AllVerbs;
                     int radVerb = Random.Range(0, allVerbs.Count);
-                    if (allVerbs[radVerb] != null && verbGiverExtended.canAutoAttack && verbGiverExtended.canAttack)
+                    if (allVerbs[radVerb] != null && verbGiverExtended.canAutoAttack && verbGiverExtended.canAttack) // take a random verb that can attack
                     {
                         TargetScanFlags targetScanFlags = TargetScanFlags.NeedLOSToPawns | TargetScanFlags.NeedLOSToNonPawns | TargetScanFlags.NeedThreat;
                         if (allVerbs[radVerb].IsIncendiary())
                         {
                             targetScanFlags |= TargetScanFlags.NeedNonBurning;
                         }
+                        // find best thing to attack
                         Thing thing = (Thing)PCF_AttackTargetFinder.BestShootTargetFromCurrentPosition(jobDriver.pawn, allVerbs[radVerb], targetScanFlags, null, 0f, 9999f);
-                        if (thing != null && !allVerbs[radVerb].IsMeleeAttack)
+                        if (thing != null && !allVerbs[radVerb].IsMeleeAttack) // attack (weird shit inbetween)
                         {
                             verbGiverExtended.rangedVerbWarmupTime = allVerbs[radVerb].verbProps.warmupTime;
                             allVerbs[radVerb].verbProps.warmupTime = 0f;

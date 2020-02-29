@@ -5,6 +5,7 @@
 		<defName>ArchotechArm</defName>
 		<label>archotech arm</label>
 		<labelNoun>an archotech arm</labelNoun>
+		<description>Test. Fix Later</description>
 		<comps>
 			<li Class="OrenoPCF.HediffCompProperties_VerbGiverExtended">
 				<toggleLabel>arch. arm</toggleLabel>

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Harmony;
+using HarmonyLib;
 using Verse;
 
-namespace OrenoPCF.Harmony
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_Pawn
     {
@@ -14,11 +14,9 @@ namespace OrenoPCF.Harmony
             public static void HediffGizmos(ref IEnumerable<Gizmo> __result, Pawn __instance)
             {
                 List<Gizmo> gizmos = new List<Gizmo>(__result);
-                List<Hediff> hediffs = __instance.health.hediffSet.hediffs;
-                int hediff = hediffs.Count;
-                for (int i = 0; i < hediff; i++)
+                foreach ( Hediff hediff in __instance.health.hediffSet.hediffs )
                 {
-                    HediffComp_HediffGizmo hediffGizmo = hediffs[i].TryGetComp<HediffComp_HediffGizmo>();
+                    HediffComp_HediffGizmo hediffGizmo = hediff.TryGetComp<HediffComp_HediffGizmo>();
                     if (hediffGizmo != null)
                     {
                         foreach (Gizmo h in hediffGizmo.CompGetGizmos())

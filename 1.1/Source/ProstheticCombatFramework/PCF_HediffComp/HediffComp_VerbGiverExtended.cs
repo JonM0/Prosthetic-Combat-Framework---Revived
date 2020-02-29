@@ -72,17 +72,16 @@ namespace OrenoPCF
         public void InitializeRangedVerb()
         {
             this.rangedVerb = this.AllVerbs.Where(verbs => !verbs.IsMeleeAttack).FirstOrDefault();
-            List<PCF_VerbProperties> verbProperties = this.Props.verbsProperties;
-            for (int i = 0; i < verbProperties.Count; i++)
+            foreach ( PCF_VerbProperties verbProperty in this.Props.verbsProperties )
             {
                 VerbProperties rangedProperties = this.rangedVerb.verbProps;
-                if (rangedProperties.label == verbProperties[i].label)
+                if (rangedProperties.label == verbProperty.label)
                 {
-                    this.rangedVerbLabel = verbProperties[i].label;
-                    this.rangedVerbDescription = verbProperties[i].description;
-                    this.rangedVerbIconPath = verbProperties[i].uiIconPath;
-                    this.rangedVerbIconAngle = verbProperties[i].uiIconAngle;
-                    this.rangedVerbIconOffset = verbProperties[i].uiIconOffset;
+                    this.rangedVerbLabel = verbProperty.label;
+                    this.rangedVerbDescription = verbProperty.description;
+                    this.rangedVerbIconPath = verbProperty.uiIconPath;
+                    this.rangedVerbIconAngle = verbProperty.uiIconAngle;
+                    this.rangedVerbIconOffset = verbProperty.uiIconOffset;
                 }
             }
         }

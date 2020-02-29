@@ -90,8 +90,7 @@ namespace OrenoPCF
                 {
                     return false;
                 }
-                Pawn pawn = t as Pawn;
-                if (onlyTargetMachines && pawn != null && pawn.RaceProps.IsFlesh)
+                if ( onlyTargetMachines && t is Pawn pawn && pawn.RaceProps.IsFlesh )
                 {
                     return false;
                 }
@@ -117,15 +116,13 @@ namespace OrenoPCF
                 else
                 {
                     bool flag2 = false;
-                    CellRect.CellRectIterator iterator = thing.OccupiedRect().GetIterator();
-                    while (!iterator.Done())
+                    foreach ( IntVec3 cellRect in thing.OccupiedRect() )
                     {
-                        if (!iterator.Current.Fogged(thing.Map))
+                        if ( cellRect.Fogged(thing.Map) )
                         {
                             flag2 = true;
                             break;
                         }
-                        iterator.MoveNext();
                     }
                     if (!flag2)
                     {

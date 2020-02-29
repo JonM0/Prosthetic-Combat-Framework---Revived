@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace OrenoPCF.Harmony
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_DraftController
     {
@@ -15,17 +15,16 @@ namespace OrenoPCF.Harmony
             [HarmonyPostfix]
             private static void VerbGiverExtended(ref IEnumerable<Gizmo> __result, Pawn_DraftController __instance)
             {
-                List<Gizmo> gizmos = new List<Gizmo>(__result);
+                List<Gizmo> gizmos = new List<Gizmo>(__result); // normal gizmos
                 List<Gizmo> toggleGizmos = new List<Gizmo>();
                 List<Gizmo> rangedVerbGizmos = new List<Gizmo>();
 
-                List<Hediff> hediffs = __instance.pawn.health.hediffSet.hediffs;
-                for (int i = 0; i < hediffs.Count; i++)
+                foreach ( Hediff hediff in __instance.pawn.health.hediffSet.hediffs ) // iterates over hediffs
                 {
-                    HediffComp_VerbGiverExtended verbGiverExtended = hediffs[i].TryGetComp<HediffComp_VerbGiverExtended>();
-                    if (verbGiverExtended != null)
+                    HediffComp_VerbGiverExtended verbGiverExtended = hediff.TryGetComp<HediffComp_VerbGiverExtended>();
+                    if (verbGiverExtended != null) // if there is a custom HediffComp
                     {
-                        Command_HediffToggle command_HediffToggle = new Command_HediffToggle
+                        Command_HediffToggle command_HediffToggle = new Command_HediffToggle // create a gizmo
                         {
                             isActive = (() => verbGiverExtended.canAutoAttack),
                             toggleAction = delegate ()
@@ -38,17 +37,18 @@ namespace OrenoPCF.Harmony
                             iconAngle = verbGiverExtended.Props.toggleIconAngle,
                             iconOffset = verbGiverExtended.Props.toggleIconOffset
                         };
-                        if (__instance.pawn.Faction != Faction.OfPlayer)
+                        if (__instance.pawn.Faction != Faction.OfPlayer) // disable show on enemies
                         {
                             command_HediffToggle.Disable("CannotOrderNonControlled".Translate());
                         }
-                        if (__instance.pawn.Downed)
+                        if (__instance.pawn.Downed) // disable on downed
                         {
                             command_HediffToggle.Disable("IsIncapped".Translate(__instance.pawn.LabelShort, __instance.pawn));
                         }
-                        toggleGizmos.Add(command_HediffToggle);
+                        toggleGizmos.Add(command_HediffToggle); // add to list of toggles
 
-                        Command_HediffVerbRanged command_HediffVerbRanged = new Command_HediffVerbRanged
+                        // command to select what verb to use 
+                        Command_HediffVerbRanged command_HediffVerbRanged = new Command_HediffVerbRanged 
                         {
                             rangedComp = verbGiverExtended,
                             defaultLabel = verbGiverExtended.rangedVerbLabel,

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace OrenoPCF.Harmony
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_Targeter
     {
@@ -14,8 +14,9 @@ namespace OrenoPCF.Harmony
         internal class Targeter_CurrentTargetUnderMouse
         {
             [HarmonyPrefix]
-            public static bool VerbGiverExtended(Targeter __instance, Verb verb)
+            public static bool VerbGiverExtended(Targeter __instance, ITargetingSource targetingSource )
             {
+                Verb verb = targetingSource.GetVerb;
                 if (verb.EquipmentSource != null || verb.EquipmentCompSource != null)
                 {
                     return true;
@@ -31,7 +32,7 @@ namespace OrenoPCF.Harmony
 
                 if (verb.verbProps.IsMeleeAttack)
                 {
-                    var targetParams = Traverse.Create(__instance).Field("targetParams").SetValue(TargetingParameters.ForAttackAny());
+                    Traverse.Create(__instance).Field("targetParams").SetValue(TargetingParameters.ForAttackAny());
                 }
                 LocalTargetInfo localTargetInfo = CurrentTargetUnderMouse(__instance, true);
                 if (!localTargetInfo.IsValid)

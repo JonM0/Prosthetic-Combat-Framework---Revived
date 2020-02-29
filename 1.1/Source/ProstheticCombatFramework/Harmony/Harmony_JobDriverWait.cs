@@ -1,8 +1,8 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse.AI;
 
-namespace OrenoPCF.Harmony
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_JobDriverWait
     {

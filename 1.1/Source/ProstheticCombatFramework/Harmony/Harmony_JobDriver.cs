@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using Verse;
 using Verse.AI;
 
-namespace OrenoPCF.Harmony
+namespace OrenoPCF.HarmonyPatches
 {
     public class Harmony_JobDriver
     {
@@ -23,11 +23,11 @@ namespace OrenoPCF.Harmony
                 */
                 if (__instance is JobDriver_Goto jobDriver_Goto)
                 {
-                    List<Toil> value = Traverse.Create(jobDriver_Goto).Field("toils").GetValue<List<Toil>>();
+                    List<Toil> value = Traverse.Create(jobDriver_Goto).Field("toils").GetValue<List<Toil>>(); // extract the list of toils (private)
                     if (value.Count() > 0)
                     {
                         Toil toil = value.ElementAt(0);
-                        toil.AddPreTickAction(delegate
+                        toil.AddPreTickAction(delegate // add action before walking
                         {
                             if (jobDriver_Goto.pawn.Downed)
                             {

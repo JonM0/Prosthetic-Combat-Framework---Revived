@@ -13,35 +13,38 @@ namespace OrenoPCF
         {
             get
             {
-                foreach (FloatMenuOption o in base.RightClickFloatMenuOptions)
+                foreach ( FloatMenuOption o in base.RightClickFloatMenuOptions )
                 {
                     yield return o;
                 }
-                if (this.rangedComp.AllVerbs != null)
+                if ( this.rangedComp.AllVerbs != null ) // the verbgiver actually has verbs
                 {
-                    foreach (Verb verb in this.rangedComp.AllVerbs.Where(verbs => !verbs.IsMeleeAttack))
+                    foreach (Verb verb in this.rangedComp.AllVerbs.Where(verbs => !verbs.IsMeleeAttack)) // take all verbs that are not melee attacks
                     {
                         string verbLabel = verb.verbProps.label.CapitalizeFirst();
-                        void selectVerb()
+
+                        void selectVerb() // define what to do when you choose this verb
                         {
-                            this.rangedComp.rangedVerb = verb;
-                            List<PCF_VerbProperties> verbProperties = this.rangedComp.Props.verbsProperties;
-                            for (int i = 0; i < verbProperties.Count; i++)
+                            this.rangedComp.rangedVerb = verb; // set active verb
+
+                            foreach ( PCF_VerbProperties verbProperties in this.rangedComp.Props.verbsProperties )
                             {
                                 VerbProperties rangedProperties = this.rangedComp.rangedVerb.verbProps;
-                                if (rangedProperties.label == verbProperties[i].label)
+                                if (rangedProperties.label == verbProperties.label)
                                 {
-                                    this.rangedComp.rangedVerbLabel = verbProperties[i].label;
-                                    this.rangedComp.rangedVerbDescription = verbProperties[i].description;
-                                    this.rangedComp.rangedVerbIconPath = verbProperties[i].uiIconPath;
-                                    this.rangedComp.rangedVerbIconAngle = verbProperties[i].uiIconAngle;
-                                    this.rangedComp.rangedVerbIconOffset = verbProperties[i].uiIconOffset;
+                                    this.rangedComp.rangedVerbLabel = verbProperties.label;
+                                    this.rangedComp.rangedVerbDescription = verbProperties.description;
+                                    this.rangedComp.rangedVerbIconPath = verbProperties.uiIconPath;
+                                    this.rangedComp.rangedVerbIconAngle = verbProperties.uiIconAngle;
+                                    this.rangedComp.rangedVerbIconOffset = verbProperties.uiIconOffset;
                                 }
                             }
                         }
+
                         yield return new FloatMenuOption(verbLabel, selectVerb);
                     }
                 }
+                yield break;
             }
         }
 

@@ -5,7 +5,7 @@ using Verse;
 
 namespace OrenoPCF
 {
-    public class Command_HediffToggle : Command
+    public class Command_HediffToggle : Command  // might be replaceable by Command_Toggle
     {
         public override SoundDef CurActivateSound
         {
