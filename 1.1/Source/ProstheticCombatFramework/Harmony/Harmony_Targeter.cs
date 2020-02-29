@@ -83,7 +83,7 @@ namespace OrenoPCF.Harmony
                     return LocalTargetInfo.Invalid;
                 }
                 var targetParams = Traverse.Create(targeter).Field("targetParams").GetValue<TargetingParameters>();
-                TargetingParameters clickParams = (targeter.targetingVerb == null) ? targetParams : targeter.targetingVerb.verbProps.targetParams;
+                TargetingParameters clickParams = (targeter.targetingSource == null) ? targetParams : targeter.targetingSource.GetVerb.verbProps.targetParams;
                 LocalTargetInfo localTargetInfo = LocalTargetInfo.Invalid;
                 using (IEnumerator<LocalTargetInfo> enumerator = GenUI.TargetsAtMouse(clickParams, false).GetEnumerator())
                 {
@@ -93,14 +93,14 @@ namespace OrenoPCF.Harmony
                         localTargetInfo = localTargetInfo2;
                     }
                 }
-                if (localTargetInfo.IsValid && mustBeHittableNowIfNotMelee && !(localTargetInfo.Thing is Pawn) && targeter.targetingVerb != null && !targeter.targetingVerb.verbProps.IsMeleeAttack)
+                if (localTargetInfo.IsValid && mustBeHittableNowIfNotMelee && !(localTargetInfo.Thing is Pawn) && targeter.targetingSource != null && !targeter.targetingSource.GetVerb.verbProps.IsMeleeAttack)
                 {
-                    if (targeter.targetingVerbAdditionalPawns != null && targeter.targetingVerbAdditionalPawns.Any<Pawn>())
+                    if (targeter.targetingSourceAdditionalPawns != null && targeter.targetingSourceAdditionalPawns.Any<Pawn>())
                     {
                         bool flag = false;
-                        for (int i = 0; i < targeter.targetingVerbAdditionalPawns.Count; i++)
+                        for (int i = 0; i < targeter.targetingSourceAdditionalPawns.Count; i++)
                         {
-                            Verb verb = GetTargetingVerb(targeter, targeter.targetingVerbAdditionalPawns[i]);
+                            Verb verb = GetTargetingVerb(targeter, targeter.targetingSourceAdditionalPawns[i]);
                             if (verb != null && verb.CanHitTarget(localTargetInfo))
                             {
                                 flag = true;
@@ -112,7 +112,7 @@ namespace OrenoPCF.Harmony
                             localTargetInfo = LocalTargetInfo.Invalid;
                         }
                     }
-                    else if (!targeter.targetingVerb.CanHitTarget(localTargetInfo))
+                    else if (!targeter.targetingSource.CanHitTarget(localTargetInfo))
                     {
                         localTargetInfo = LocalTargetInfo.Invalid;
                     }
@@ -122,7 +122,7 @@ namespace OrenoPCF.Harmony
 
             private static Verb GetTargetingVerb(Targeter targeter, Pawn pawn)
             {
-                return pawn.equipment.AllEquipmentVerbs.FirstOrDefault((Verb x) => x.verbProps == targeter.targetingVerb.verbProps);
+                return pawn.equipment.AllEquipmentVerbs.FirstOrDefault((Verb x) => x.verbProps == targeter.targetingSource.GetVerb.verbProps);
             }
         }
     }

@@ -92,7 +92,7 @@ namespace OrenoPCF
             {
                 return false;
             }
-            if (pawn.story != null && pawn.story.WorkTagIsDisabled(WorkTags.Violent))
+            if (pawn.story != null && pawn.story.DisabledWorkTagsBackstoryAndTraits.HasFlag( WorkTags.Violent ) )
             {
                 return false;
             }

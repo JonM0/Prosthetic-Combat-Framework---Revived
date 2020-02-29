@@ -45,7 +45,7 @@ namespace OrenoPCF
                                         }
                                         else if (pawn.IsColonist)
                                         {
-                                            if (pawn.story.WorkTagIsDisabled(WorkTags.Violent))
+                                            if (pawn.story.DisabledWorkTagsBackstoryAndTraits.HasFlag(WorkTags.Violent))
                                             {
                                                 command_HediffVerbMelee.Disable("IsIncapableOfViolenceLower".Translate(pawn.LabelShort, pawn));
                                             }

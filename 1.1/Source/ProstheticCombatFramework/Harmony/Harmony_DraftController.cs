@@ -63,7 +63,7 @@ namespace OrenoPCF.Harmony
                         }
                         else if (__instance.pawn.IsColonist)
                         {
-                            if (__instance.pawn.story.WorkTagIsDisabled(WorkTags.Violent))
+                            if (__instance.pawn.story.DisabledWorkTagsBackstoryAndTraits.HasFlag( WorkTags.Violent ) )
                             {
                                 command_HediffVerbRanged.Disable("IsIncapableOfViolence".Translate(__instance.pawn.LabelShort, __instance.pawn));
                             }
