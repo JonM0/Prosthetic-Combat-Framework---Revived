@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- Fake weaponDef that gets used to patch Verse.BattleLogEntry_RangedImpact.GenerateGrammarRequest() -->
+	<ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+		<defName>PCF_LogPlaceholder</defName>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Will_Get_Replaced</defaultProjectile>
+				<warmupTime>1.25</warmupTime>
+				<range>26.9</range>
+				<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+				<burstShotCount>24</burstShotCount>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+			</li>
+		</verbs>
+		<weaponTags Inherit="False" />
+  	</ThingDef>
+	  
+</Defs>

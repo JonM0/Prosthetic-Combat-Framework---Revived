@@ -69,6 +69,7 @@
     <Compile Include="Harmony\Harmony_JobDriverWait.cs" />
     <Compile Include="Harmony\Harmony_PawnAttackGizmoUtility.cs" />
     <Compile Include="Harmony\Harmony_Targeter.cs" />
+    <Compile Include="Harmony\Harmony_BattleLogEntry_RangedImpact.cs" />
     <Compile Include="ProstheticCombatFramework.cs" />
     <Compile Include="Harmony\Harmony_Pawn.cs" />
     <Compile Include="PCF_AttackTargetFinder.cs" />

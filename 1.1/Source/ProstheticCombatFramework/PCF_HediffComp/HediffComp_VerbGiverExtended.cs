@@ -126,6 +126,11 @@ namespace OrenoPCF
             }
         }
 
+        //public override void Notify_PawnUsedVerb ( Verb verb, LocalTargetInfo target )  // DEBUG PURPOSES    ---------
+        //{
+        //    Log.Message( "Notify_PawnUsedVerb was called: " + verb.ToString() );
+        //}
+
         public override void CompPostPostRemoved()
         {
             base.CompPostPostRemoved();
