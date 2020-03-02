@@ -8,7 +8,8 @@
 			<li>
 				<verbClass>Verb_Shoot</verbClass>
 				<hasStandardCommand>true</hasStandardCommand>
-				<defaultProjectile>Will_Get_Replaced</defaultProjectile>
+				<!-- Projectile will be replaced when needed by the log grammar request -->
+				<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
 				<warmupTime>1.25</warmupTime>
 				<range>26.9</range>
 				<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
