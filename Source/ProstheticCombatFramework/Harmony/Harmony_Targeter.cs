@@ -29,6 +29,10 @@ namespace OrenoPCF.HarmonyPatches
                 {
                     return true;
                 }
+                if ( verb is Verb_CastPsycast )
+                {
+                    return true;
+                }
 
                 if (verb.verbProps.IsMeleeAttack)
                 {
@@ -123,7 +127,7 @@ namespace OrenoPCF.HarmonyPatches
 
             private static Verb GetTargetingVerb(Targeter targeter, Pawn pawn)
             {
-                return pawn.equipment.AllEquipmentVerbs.FirstOrDefault((Verb x) => x.verbProps == targeter.targetingSource.GetVerb.verbProps);
+                return pawn.equipment.AllEquipmentVerbs.FirstOrDefault((Verb x) => x.verbProps == targeter.targetingSource.GetVerb.verbProps && !(x is Verb_CastPsycast) );
             }
         }
     }

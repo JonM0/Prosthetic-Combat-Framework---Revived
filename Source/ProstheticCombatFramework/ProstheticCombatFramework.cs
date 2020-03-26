@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 using HarmonyLib;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using RimWorld;
 
 namespace OrenoPCF
 {
@@ -28,7 +30,7 @@ namespace OrenoPCF
                 HediffComp_VerbGiverExtended verbGiverExtended = hediff.TryGetComp<HediffComp_VerbGiverExtended>();
                 if (verbGiverExtended != null) // for each comp that gives verbs do this:
                 {
-                    List<Verb> allVerbs = verbGiverExtended.AllVerbs;
+                    List<Verb> allVerbs = new List<Verb>( verbGiverExtended.AllVerbs.SkipWhile((Verb verb) => verb is Verb_CastPsycast ) );
                     int radVerb = Random.Range(0, allVerbs.Count);
                     if (allVerbs[radVerb] != null && verbGiverExtended.canAutoAttack && verbGiverExtended.canAttack) // take a random verb that can attack
                     {
