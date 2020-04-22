@@ -72,7 +72,6 @@
     <Compile Include="ProstheticCombatFramework.cs" />
     <Compile Include="Harmony\Harmony_Pawn.cs" />
     <Compile Include="PCF_AttackTargetFinder.cs" />
-    <Compile Include="PCF_Command\Command_HediffToggle.cs" />
     <Compile Include="PCF_Command\Command_HediffVerbMelee.cs" />
     <Compile Include="PCF_Command\Command_HediffVerbRanged.cs" />
     <Compile Include="PCF_HediffComp\HediffComp_HediffGizmo.cs" />
