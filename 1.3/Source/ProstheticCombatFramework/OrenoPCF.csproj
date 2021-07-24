@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
@@ -54,11 +54,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -70,11 +70,9 @@
     <Compile Include="Harmony\Harmony_Targeter.cs" />
     <Compile Include="Harmony\Harmony_BattleLogEntry_RangedImpact.cs" />
     <Compile Include="ProstheticCombatFramework.cs" />
-    <Compile Include="Harmony\Harmony_Pawn.cs" />
     <Compile Include="PCF_AttackTargetFinder.cs" />
     <Compile Include="PCF_Command\Command_HediffVerbMelee.cs" />
     <Compile Include="PCF_Command\Command_HediffVerbRanged.cs" />
-    <Compile Include="PCF_HediffComp\HediffComp_HediffGizmo.cs" />
     <Compile Include="PCF_HediffComp\HediffComp_VerbGiverExtended.cs" />
     <Compile Include="PCF_HediffComp\Properties\HediffCompProperties_VerbGiverExtended.cs" />
     <Compile Include="PCF_JobDriver\JobDriver_AttackStatic.cs" />

@@ -17,7 +17,7 @@ namespace OrenoPCF
             Pawn searcherPawn = searcher as Pawn;
             if (verb == null)
             {
-                Log.Error("BestAttackTarget with " + searcher.ToStringSafe<IAttackTargetSearcher>() + " who has no attack verb.", false);
+                Log.Error("BestAttackTarget with " + searcher.ToStringSafe<IAttackTargetSearcher>() + " who has no attack verb.");
                 return null;
             }
             bool onlyTargetMachines = verb.IsEMP();
@@ -209,7 +209,7 @@ namespace OrenoPCF
         {
             if (searcher is Pawn pawn)
             {
-                if (!pawn.CanReach(target, PathEndMode.Touch, Danger.Some, canBash, TraverseMode.ByPawn))
+                if (!pawn.CanReach(target, PathEndMode.Touch, Danger.Some, canBash, canBash, TraverseMode.ByPawn))
                 {
                     return false;
                 }
@@ -475,7 +475,7 @@ namespace OrenoPCF
             }
             Map map = pawn.Map;
             ShotReport report = ShotReport.HitReportFor(pawn, verb, (Thing)target);
-            float a = VerbUtility.CalculateAdjustedForcedMiss(verb.verbProps.forcedMissRadius, report.ShootLine.Dest - report.ShootLine.Source);
+            float a = VerbUtility.CalculateAdjustedForcedMiss(verb.verbProps.ForcedMissRadius, report.ShootLine.Dest - report.ShootLine.Source);
             float radius = Mathf.Max(a, 1.5f);
             IntVec3 dest2 = report.ShootLine.Dest;
             IEnumerable<IntVec3> source = from dest in GenRadial.RadialCellsAround(dest2, radius, true) where dest.InBounds(map) select dest;
@@ -528,7 +528,7 @@ namespace OrenoPCF
         {
             if (verb == null)
             {
-                Log.Error("BestShootTargetFromCurrentPosition with " + searcher.ToStringSafe<IAttackTargetSearcher>() + " who has no attack verb.", false);
+                Log.Error("BestShootTargetFromCurrentPosition with " + searcher.ToStringSafe<IAttackTargetSearcher>() + " who has no attack verb.");
                 return null;
             }
             return PCF_AttackTargetFinder.BestAttackTarget(searcher, verb, flags, validator, Mathf.Max(minDistance, verb.verbProps.minRange), Mathf.Min(maxDistance, verb.verbProps.range), default(IntVec3), float.MaxValue, false, false);

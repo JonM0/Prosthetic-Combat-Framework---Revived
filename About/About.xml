@@ -7,11 +7,11 @@
 
 	<author>Oreno</author>
 	<packageId>Jon.Revivals.ProstheticCombatFramework</packageId>
-	<url></url>
+	<url>https://github.com/JonM0/Prosthetic-Combat-Framework---Revived</url>
 
 	<supportedVersions>
-		<li>1.1</li>
 		<li>1.2</li>
+		<li>1.3</li>
 	</supportedVersions>
 
 	<modDependencies>
